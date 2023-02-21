@@ -1,0 +1,119 @@
+{
+    "workflowApiVersion": "1.1",
+    "metaData":
+    {
+        "icon": "images/icon.png",
+        "iconSmall": "images/iconSmall.png",
+        "category": "flow"
+    },
+
+    "type": "RESTDECISION",
+    "lang":
+    {
+        "en-US":
+        {
+            "name": "Custom Decision Split",
+            "description": "Custom Decision Split Abbott",
+            "step1Label": "Configure Activity"
+        }
+    },
+    "arguments":
+    {
+        "execute":
+        {
+            "inArguments": [
+              { 
+                "firstName": "{{Contact.Attribute.FirstName}}",
+                "lastName": "{{Contact.Attribute.LastName}}", 
+                "phoneNumber": "{{Contact.Attribute.Mobile}}",
+                "selectedMsgID": "",
+                "campaignName": "",
+                "contactID": "",
+                "smsBoolean": "",
+                "shortMsg": ""
+              }
+            ],
+            "outArguments": [],
+            "url": "https://sg-split-app-tiger-dev.herokuapp.com/journeybuilder/execute",
+            "verb": "POST",
+            "body": "",
+            "header": "",
+            "format": "json",
+            "useJwt": true,
+            "timeout": 10000
+        }
+    },
+    
+    "configurationArguments":
+    {
+        "applicationExtensionKey": "1e21dc63-0561-440e-96df-ec38f833db76",
+        "save":
+        {
+            "url": "https://sg-split-app-tiger-dev.herokuapp.com/journeybuilder/save",
+            "verb": "POST",
+            "useJwt": true
+        },
+        "publish":
+        {
+            "url": "https://sg-split-app-tiger-dev.herokuapp.com/journeybuilder/publish",
+            "verb": "POST",
+            "useJwt": true
+        },
+        "stop":
+        {
+            "url": "https://sg-split-app-tiger-dev.herokuapp.com/journeybuilder/stop",
+            "verb": "POST",
+            "useJwt": true
+        },
+        "validate":
+        {
+            "url": "https://sg-split-app-tiger-dev.herokuapp.com/journeybuilder/validate",
+            "verb": "POST",
+            "useJwt": true
+        }
+    },
+
+    "outcomes": [
+        {
+            "arguments": {
+                "branchResult": "first_path",
+                "some argument": "passed from config.json for first_path"
+            }
+        },
+        {
+            "arguments": {
+                "branchResult": "1",
+                "some argument": "passed from config.json for first_path"
+            }
+        },
+        {
+            "arguments": {
+                "branchResult": "remainder",
+                "some argument": "passed from config.json for remainder"
+            }
+        }
+    ],
+
+    "wizardSteps": [
+    {
+        "label": "Configure Activity",
+        "key": "step1"
+    }],
+    "userInterfaces":
+    {
+        "configModal": {
+            "height": 700,
+            "width": 1000,
+            "fullscreen": false
+        }
+    },
+    "schema": 
+    {
+        "arguments":{
+            "execute": {
+                "inArguments": [],
+                "outArguments": []
+            }
+        }
+    }
+}
